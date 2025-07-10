@@ -42,6 +42,24 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }
 
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<ErrorDetails> handleResourceNotFoundException(ResourceNotFoundException exception,
+                                                                        HttpServletRequest request){
+
+        ErrorDetails errorDetails = new ErrorDetails(
+                LocalDateTime.now(),
+                exception.getMessage(),
+                request.getRequestURI(),
+                "RESOURCE_NOT_FOUND"
+        );
+
+        logger.warn("Handled error: {}", errorDetails);
+
+        return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+    }
+
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorDetails> handleGlobalException(Exception exception,
                                                               HttpServletRequest request){
@@ -53,7 +71,7 @@ public class GlobalExceptionHandler {
                 "INTERNAL_SERVER_ERROR"
         );
 
-        logger.error("Unhandled exception at {}: {}", request.getRequestURI(), exception.getMessage(), exception);
+        logger.error("Unexpected error at {}: {}", request.getRequestURI(), exception.getMessage(), exception);
 
         return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
     }
