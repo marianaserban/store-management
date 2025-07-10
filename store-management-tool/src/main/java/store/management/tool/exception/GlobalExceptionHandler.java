@@ -1,6 +1,5 @@
 package store.management.tool.exception;
 
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
@@ -10,10 +9,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import store.management.tool.exception.errors.ErrorDetails;
+import store.management.tool.exception.errors.InternalServerErrorDetails;
+import store.management.tool.exception.errors.ResourceNotFoundErrorDetails;
+import store.management.tool.exception.errors.ValidationErrorDetails;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @ControllerAdvice
@@ -30,12 +31,12 @@ public class GlobalExceptionHandler {
                 .map(ConstraintViolation::getMessage)
                 .collect(Collectors.joining(";"));
 
-        ErrorDetails errorDetails = new ErrorDetails(
+        ErrorDetails errorDetails = new ValidationErrorDetails(
                 LocalDateTime.now(),
                 message,
-                request.getRequestURI(),
-                "VALIDATION_FAILED"
+                request.getRequestURI()
         );
+
 
         logger.warn("Handled error: {}", errorDetails);
 
@@ -47,13 +48,11 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorDetails> handleResourceNotFoundException(ResourceNotFoundException exception,
                                                                         HttpServletRequest request){
 
-        ErrorDetails errorDetails = new ErrorDetails(
+        ErrorDetails errorDetails = new ResourceNotFoundErrorDetails(
                 LocalDateTime.now(),
                 exception.getMessage(),
-                request.getRequestURI(),
-                "RESOURCE_NOT_FOUND"
+                request.getRequestURI()
         );
-
         logger.warn("Handled error: {}", errorDetails);
 
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
@@ -64,12 +63,12 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorDetails> handleGlobalException(Exception exception,
                                                               HttpServletRequest request){
 
-        ErrorDetails errorDetails = new ErrorDetails(
+        ErrorDetails errorDetails = new InternalServerErrorDetails(
                 LocalDateTime.now(),
                 exception.getMessage(),
-                request.getRequestURI(),
-                "INTERNAL_SERVER_ERROR"
+                request.getRequestURI()
         );
+
 
         logger.error("Unexpected error at {}: {}", request.getRequestURI(), exception.getMessage(), exception);
 
