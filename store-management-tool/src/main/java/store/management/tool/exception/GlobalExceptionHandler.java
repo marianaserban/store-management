@@ -30,14 +30,14 @@ public class GlobalExceptionHandler {
                 .map(ConstraintViolation::getMessage)
                 .collect(Collectors.joining(";"));
 
-        logger.warn("Validation failed at {}: {}", request.getRequestURI(), message);
-
         ErrorDetails errorDetails = new ErrorDetails(
                 LocalDateTime.now(),
                 message,
                 request.getRequestURI(),
                 "VALIDATION_FAILED"
         );
+
+        logger.warn("Handled error: {}", errorDetails);
 
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }

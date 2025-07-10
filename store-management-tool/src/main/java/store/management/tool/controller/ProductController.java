@@ -38,6 +38,21 @@ public class ProductController {
         ProductDTO user = productService.getProductById(productId);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
-    
+
+    //Update product
+    @PutMapping("{id}")
+    public ResponseEntity<ProductDTO> updateUser(@PathVariable("id") Long productId,
+                                              @RequestBody ProductDTO productDTO){
+        productDTO.setId(productId);
+        ProductDTO updatedProduct = productService.updateProduct(productDTO);
+        return new ResponseEntity<>(updatedProduct, HttpStatus.OK);
+    }
+
+    //Delete product
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable("id") Long productId){
+        productService.deleteProduct(productId);
+        return new ResponseEntity<>("Product successfully deleted!", HttpStatus.OK);
+    }
 }
 
