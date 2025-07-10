@@ -19,14 +19,10 @@ public class ProductController {
 
     //Save product REST API
     @PostMapping
-    public ResponseEntity<ProductDTO>saveProduct(@Valid @RequestBody ProductDTO productDTO){
+    public ResponseEntity<ProductDTO>saveProduct(@RequestBody ProductDTO productDTO){
         ProductDTO savedProduct = productService.saveProduct(productDTO);
         return new ResponseEntity<>(savedProduct, HttpStatus.CREATED);
     }
 
-    @GetMapping
-    public String test(){
-        return "test";
-    }
 }
 
