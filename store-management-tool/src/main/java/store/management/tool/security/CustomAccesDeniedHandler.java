@@ -19,7 +19,11 @@ public class CustomAccesDeniedHandler implements AccessDeniedHandler {
         response.setStatus(HttpServletResponse.SC_FORBIDDEN);
         response.setContentType("application/json");
 
-        String json = "{\"error\": \"You do not have the necessary role to perform this action.\"}";
+        String json = """
+        {
+          "error": "You do not have the necessary role to perform this action."
+        }
+        """;
         response.getWriter().write(json);
     }
 }

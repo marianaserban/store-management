@@ -2,6 +2,7 @@ package store.management.tool.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import lombok.*;
 
@@ -18,6 +19,7 @@ public class Product {
     private Long id;
 
     @Column(name = "name",nullable = false)
+    @NotBlank(message = "Name may not be blank!")
     private String name;
 
     @Column(name = "description")
