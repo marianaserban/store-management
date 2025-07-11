@@ -2,6 +2,10 @@
 
 Spring Boot application for managing products in a store. Includes authentication, role-based authorization, exception handling, logging, unit tests and database persistence.
 
+# Author #
+- Mariana Serban
+- Email: marianaserban734@gmail.com
+
 # Project Structure #
 | Module       | Description                             |
 |--------------|-------------------------------------|
