@@ -90,6 +90,7 @@ When a user tries to perform an action without the proper role, a custom JSON re
     - run the following command to create db: create database store_management;
       
 3. Configure db connection. Update the application.properties file with your credentials:
+
 spring.datasource.url=jdbc:mysql://localhost:3306/store_management
 spring.datasource.username=your_username
 spring.datasource.password=your_password
