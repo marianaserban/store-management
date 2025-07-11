@@ -91,7 +91,7 @@ When a user tries to perform an action without the proper role, a custom JSON re
 2. Set up MySQL database
     - make sure you have MySQL Server and MySQL Workbench installed
     - open MySQL Workbench and connect to your local MySQL Server
-    - run the following command to create db: create database store_management;
+    - run the following command to create db: *create database store_management;*
       
 3. Configure db connection. Update the application.properties file with your credentials:
 
