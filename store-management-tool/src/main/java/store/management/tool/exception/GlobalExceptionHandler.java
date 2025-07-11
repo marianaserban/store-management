@@ -70,7 +70,7 @@ public class GlobalExceptionHandler {
         );
 
 
-        logger.error("Unexpected error at {}: {}", request.getRequestURI(), exception.getMessage(), exception);
+        logger.error("Unexpected internal server error: {}", errorDetails);
 
         return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
     }
