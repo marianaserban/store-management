@@ -36,22 +36,25 @@ The application uses Spring Security with in-memory user authentication and role
 
 In - memory users:
 
-| Username    | Password | ROLE    |
-| user        | user     | USER    |
-| admin       | admin    | ADMIN   |
+| Username | Password | ROLE  |
+|----------|----------|-------|
+| user     | user     | USER  |
+| admin    | admin    | ADMIN |
 
 Access rules:
-| HTTP Method | Path  | Access Role |
-| GET       | /** | USER, ADMIN |
-| POST      | /** | ADMIN only  |
-| PUT       | /** | ADMIN only  |
-| DELETE    | /** | ADMIN only  |
+| HTTP Method | Path | Access Role   |
+|-------------|------|---------------|
+| GET         | /**  | USER, ADMIN   |
+| POST        | /**  | ADMIN only    |
+| PUT         | /**  | ADMIN only    |
+| DELETE      | /**  | ADMIN only    |
 
 When a user tries to perform an action without the proper role, a custom JSON response is returned:
 
 {
   "error": "You do not have the necessary role to perform this action."
 }
+
 
 # Error handling and logging #
 - the application uses a global exception handler. All error responses follow a common format, making them easy to parse and debug.
@@ -75,14 +78,17 @@ When a user tries to perform an action without the proper role, a custom JSON re
 
 # How to run
 1. Clone repo
+
 2. Set up MySQL database
     - make sure you have MySQL Server and MySQL Workbench installed
     - open MySQL Workbench and connect to your local MySQL Server
     - run the following command to create db: create database store_management;
+      
 3. Configure db connection. Update the application.properties file with your credentials:
 spring.datasource.url=jdbc:mysql://localhost:3306/store_management
 spring.datasource.username=your_username
 spring.datasource.password=your_password
+
 4. Run the application
 The app will start on http://localhost:8080.
 Use Postman with basic auth to access endpoints.
