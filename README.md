@@ -16,7 +16,7 @@ Spring Boot application for managing products in a store. Includes authenticatio
 
 # Tech stack #
 - Java 17
-- Spring Boot
+- Spring Boot 3.5.3
 - Spring Data JPA
 - Spring Security
 - MySQL database
@@ -62,11 +62,11 @@ When a user tries to perform an action without the proper role, a custom JSON re
 # Error handling and logging #
 - the application uses a global exception handler. All error responses follow a common format, making them easy to parse and debug.
 
-{
-  "timestamp": "2025-07-11T13:31:48.6784302",
-  "message": "Product not found with id : '22'",
-  "path": "/api/products/22"
-}
+{  
+  "timestamp": "2025-07-11T13:31:48.6784302",  
+  "message": "Product not found with id : '22'",  
+  "path": "/api/products/22"  
+} 
 
 - all errors are logged: warnings and errors 
 
@@ -75,7 +75,7 @@ When a user tries to perform an action without the proper role, a custom JSON re
 - tests cover main business logic, including CRUD operations and error scenarios
 
 # Java 17+ features
-**__sealed interface__** with multiple **__records__** to model error response
+- used **__sealed interface__** with multiple **__records__** to model error response
 
 # Best practices
 - utilized **Java Streams** for efficient and readable collection processing
@@ -91,10 +91,10 @@ When a user tries to perform an action without the proper role, a custom JSON re
       
 3. Configure db connection. Update the application.properties file with your credentials:
 
-spring.datasource.url=jdbc:mysql://localhost:3306/store_management
-spring.datasource.username=your_username
-spring.datasource.password=your_password
+spring.datasource.url=jdbc:mysql://localhost:3306/store_management  
+spring.datasource.username=your_username  
+spring.datasource.password=your_password  
 
 4. Run the application
-The app will start on http://localhost:8080.
-Use Postman with basic auth to access endpoints.
+The app will start on http://localhost:8080
+Use Postman with basic auth to access endpoints
