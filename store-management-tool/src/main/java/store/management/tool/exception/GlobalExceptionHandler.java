@@ -38,7 +38,7 @@ public class GlobalExceptionHandler {
         );
 
 
-        logger.warn("Handled error: {}", errorDetails);
+        logger.warn("Handled validation error: {}", errorDetails);
 
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }
@@ -53,7 +53,7 @@ public class GlobalExceptionHandler {
                 exception.getMessage(),
                 request.getRequestURI()
         );
-        logger.warn("Handled error: {}", errorDetails);
+        logger.warn("Handled resource not found error: {}", errorDetails);
 
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
     }
